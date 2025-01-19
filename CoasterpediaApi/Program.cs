@@ -1,4 +1,3 @@
-using System.Data;
 using CoasterpediaApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);

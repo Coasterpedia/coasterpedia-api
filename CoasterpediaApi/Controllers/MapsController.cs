@@ -1,4 +1,3 @@
-using System.Text.Json;
 using CoasterpediaApi.Repositories;
 using GeoJSON.Text.Feature;
 using GeoJSON.Text.Geometry;
