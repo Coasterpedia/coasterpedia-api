@@ -1,6 +1,6 @@
 ﻿services:
   coasterpediaapi:
-    image: ghcr.io/coasterpedia/coasterpedia-api/api@${MEDIAWIKI_IMAGE}
+    image: ghcr.io/coasterpedia/coasterpedia-api/api@${API_IMAGE}
     restart: always
     networks:
       - web
