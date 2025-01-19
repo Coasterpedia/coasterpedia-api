@@ -8,7 +8,7 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["CoasterpediaApi/CoasterpediaApi.csproj", "CoasterpediaApi/"]
-RUN dotnet restore "CoasterpediaApi/CoasterpediaApi.csproj" -a $TARGETARCH
+RUN dotnet restore -a $TARGETARCH "CoasterpediaApi/CoasterpediaApi.csproj"
 COPY . .
 WORKDIR "/src/CoasterpediaApi"
 RUN dotnet build "CoasterpediaApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
