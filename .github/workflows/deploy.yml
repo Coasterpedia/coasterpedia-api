@@ -20,7 +20,7 @@ jobs:
       packages: write
 
     env:
-      IMAGE_NAME: Coasterpedia/coasterpedia-web/mediawiki
+      IMAGE_NAME: Coasterpedia/coasterpedia-api/api
 
     outputs:
       digest: ${{steps.build-and-push.outputs.digest}}
