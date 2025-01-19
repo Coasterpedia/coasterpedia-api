@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "IyUyWSVxqv3MgiWRTfroBrxXWJpul8VvA1gOWU842Bw=",
+  "Source": "CoasterpediaApi",
+  "BasePath": "_content/CoasterpediaApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
