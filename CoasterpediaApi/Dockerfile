@@ -11,7 +11,7 @@ COPY ["CoasterpediaApi/CoasterpediaApi.csproj", "CoasterpediaApi/"]
 RUN dotnet restore "CoasterpediaApi/CoasterpediaApi.csproj"
 COPY . .
 WORKDIR "/src/CoasterpediaApi"
-RUN dotnet build "CoasterpediaApi.csproj" -c $BUILD_CONFIGURATION -a $TARGETARCH -o /app/build
+RUN dotnet build "CoasterpediaApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
