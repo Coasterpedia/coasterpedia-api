@@ -28,12 +28,12 @@ public class MapsController : ControllerBase
             var point = new Point(position);
             var properties = new Dictionary<string, object?>
             {
-                ["title"] = HttpUtility.HtmlEncode("[[" + waterSlide.PageTitle + '|' + waterSlide.Name + "]]"),
+                ["title"] = waterSlide.PageTitle,
             };
-            if (waterSlide.Image is not null)
-            {
-                properties["description"] = HttpUtility.HtmlEncode("[[File:" + waterSlide.Image + "]]");
-            }
+            // if (waterSlide.Image is not null)
+            // {
+            //     properties["description"] = HttpUtility.HtmlEncode("[[File:" + waterSlide.Image + "]]");
+            // }
 
             var feature = new Feature(point, properties);
             featureCollection.Features.Add(feature);
