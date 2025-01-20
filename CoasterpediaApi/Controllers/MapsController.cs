@@ -1,3 +1,4 @@
+using System.Web;
 using CoasterpediaApi.Repositories;
 using GeoJSON.Text.Feature;
 using GeoJSON.Text.Geometry;
@@ -15,7 +16,7 @@ public class MapsController : ControllerBase
     {
         _waterSlidesRepository = waterSlidesRepository;
     }
-    
+
     [HttpGet("slides")]
     public async Task<IActionResult> GetSlides()
     {
@@ -27,15 +28,17 @@ public class MapsController : ControllerBase
             var point = new Point(position);
             var properties = new Dictionary<string, object?>
             {
-                ["title"] =  "[[" + waterSlide.PageTitle + '|' + waterSlide.Name + "]]",
+                ["title"] = HttpUtility.HtmlEncode("[[" + waterSlide.PageTitle + '|' + waterSlide.Name + "]]"),
             };
             if (waterSlide.Image is not null)
             {
-                properties["description"] = "[[File:" + waterSlide.Image + "]]";
+                properties["description"] = HttpUtility.HtmlEncode("[[File:" + waterSlide.Image + "]]");
             }
+
             var feature = new Feature(point, properties);
             featureCollection.Features.Add(feature);
         }
+
         return Ok(featureCollection);
     }
 }
