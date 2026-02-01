@@ -1,17 +1,15 @@
-using Microsoft.AspNetCore.HttpLogging;
+using Amazon.SimpleNotificationService;
+using CoasterpediaApi.Events.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpLogging(logging =>
-{
-    logging.LoggingFields = HttpLoggingFields.All;
-    logging.CombineLogs = true;
-});
+builder.Services.AddOptions<SnsSettings>().Bind(builder.Configuration.GetSection(nameof(SnsSettings)));
 builder.Services.AddControllers();
+builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+builder.Services.AddAWSService<IAmazonSimpleNotificationService>();
 
 var app = builder.Build();
 
-app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.MapControllers();
 

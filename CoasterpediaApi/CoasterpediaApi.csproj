@@ -5,16 +5,12 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Corvus.Json.ExtendedTypes" Version="4.5.1" />
-        <PackageReference Include="Corvus.Json.SourceGenerator" Version="4.5.1">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.3.22" />
+        <PackageReference Include="AWSSDK.SimpleNotificationService" Version="4.0.2.16" />
     </ItemGroup>
 
     <ItemGroup>

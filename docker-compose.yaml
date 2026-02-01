@@ -6,6 +6,7 @@
       - coasterpedia_web
     environment:
       ConnectionStrings__DefaultConnection: Server=${MYSQL_SERVER};database=${MYSQL_DATABASE};Uid=${MYSQL_USER};Pwd=${MYSQL_PASSWORD};Charset=utf8;
+      SnsSettings__TopicArn: ${SNS_TOPIC_ARN}
 networks:
   coasterpedia_web:
     external: true

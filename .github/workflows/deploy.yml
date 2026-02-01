@@ -89,6 +89,7 @@ jobs:
             export MYSQL_PASSWORD="${{secrets.MYSQL_PASSWORD}}" &&
             export MYSQL_SERVER="${{secrets.MYSQL_SERVER}}" &&
             export MYSQL_USER="${{secrets.MYSQL_USER}}" &&
+            export SNS_TOPIC_ARN="${{secrets.SNS_TOPIC_ARN}}" &&
             if cd coasterpedia-api; then git pull; else git clone --depth 1 -b main https://github.com/${{ github.repository }} coasterpedia-api; fi &&
             docker compose pull &&
             docker compose up -d -V &&
