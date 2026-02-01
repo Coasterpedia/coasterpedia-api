@@ -22,14 +22,14 @@ public class EventsController : ControllerBase
     }
 
     [HttpPost("/{*path}")]
-    public async Task<IActionResult> Action(string request)
+    public async Task<IActionResult> Action()
     {
         try
         {
             var response = await _snsClient.PublishAsync(new PublishRequest
             {
                 TopicArn = _snsSettings.Value.TopicArn,
-                Message = request
+                Message = await new StreamReader(Request.Body).ReadToEndAsync(),
             });
 
 

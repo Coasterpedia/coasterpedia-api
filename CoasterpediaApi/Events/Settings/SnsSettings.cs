@@ -2,5 +2,5 @@ namespace CoasterpediaApi.Events.Settings;
 
 public record SnsSettings
 {
-    public readonly string TopicArn;
+    public string TopicArn { get; init; }
 }
