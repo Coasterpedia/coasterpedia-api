@@ -9,10 +9,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.3.22" />
-        <PackageReference Include="AWSSDK.SimpleNotificationService" Version="4.0.2.16" />
-        <PackageReference Include="AWSSDK.SSO" Version="4.0.2.13" />
-        <PackageReference Include="AWSSDK.SSOOIDC" Version="4.0.3.14" />
+        <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.3.30" />
+        <PackageReference Include="AWSSDK.SimpleNotificationService" Version="4.0.2.24" />
+        <PackageReference Include="AWSSDK.SSO" Version="4.0.2.21" />
+        <PackageReference Include="AWSSDK.SSOOIDC" Version="4.0.3.22" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
 using CoasterpediaApi.Events.Settings;
@@ -26,15 +28,26 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var response = await _snsClient.PublishAsync(new PublishRequest
+            var body = await JsonSerializer.DeserializeAsync<JsonArray>(Request.Body);
+            foreach (var eventBody in body)
             {
-                TopicArn = _snsSettings.Value.TopicArn,
-                Message = await new StreamReader(Request.Body).ReadToEndAsync(),
-            });
-
-
-            _logger.LogInformation("Published message topic {TopicArn}, {MessageId}", _snsSettings.Value.TopicArn,
-                response.MessageId);
+                var response = await _snsClient.PublishAsync(new PublishRequest
+                {
+                    TopicArn = _snsSettings.Value.TopicArn,
+                    Message = JsonSerializer.Serialize(eventBody),
+                    MessageAttributes = new Dictionary<string, MessageAttributeValue>
+                    {
+                        {"schema", new MessageAttributeValue
+                        {
+                            DataType = "String",
+                            StringValue = eventBody["$schema"].ToString()
+                        }}
+                    }
+                });
+                
+                _logger.LogInformation("Published message topic {TopicArn}, {MessageId}", _snsSettings.Value.TopicArn,
+                    response.MessageId);
+            }
         }
         catch (Exception ex)
         {
