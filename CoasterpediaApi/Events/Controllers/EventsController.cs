@@ -40,7 +40,17 @@ public class EventsController : ControllerBase
                         {"schema", new MessageAttributeValue
                         {
                             DataType = "String",
-                            StringValue = eventBody["$schema"].ToString()
+                            StringValue = eventBody?["$schema"]?.ToString()
+                        }},
+                        {"user", new MessageAttributeValue
+                        {
+                            DataType = "String",
+                            StringValue = eventBody?["performer"]?["user_text"]?.ToString()
+                        }},
+                        {"namespace", new MessageAttributeValue
+                        {
+                            DataType = "String",
+                            StringValue = eventBody?["page_namespace"]?.ToString()
                         }}
                     }
                 });
