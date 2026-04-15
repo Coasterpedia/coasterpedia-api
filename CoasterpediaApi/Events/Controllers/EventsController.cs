@@ -31,28 +31,39 @@ public class EventsController : ControllerBase
             var body = await JsonSerializer.DeserializeAsync<JsonArray>(Request.Body);
             foreach (var eventBody in body)
             {
+                var attributes = new Dictionary<string, MessageAttributeValue>();
+                if (eventBody?["performer"]?["user_text"] != null)
+                {
+                    attributes.Add("schema", new MessageAttributeValue
+                    {
+                        DataType = "String",
+                        StringValue = eventBody["$schema"]?.ToString()
+                    });
+                }
+
+                if (eventBody?["performer"]?["user_text"] != null)
+                {
+                    attributes.Add("user", new MessageAttributeValue
+                    {
+                        DataType = "String",
+                        StringValue = eventBody["performer"]?["user_text"]?.ToString()
+                    });
+                }
+
+                if (eventBody?["page_namespace"] != null)
+                {
+                    attributes.Add("namespace", new MessageAttributeValue
+                    {
+                        DataType = "String",
+                        StringValue = eventBody?["page_namespace"]?.ToString()
+                    });
+                }
+                
                 var response = await _snsClient.PublishAsync(new PublishRequest
                 {
                     TopicArn = _snsSettings.Value.TopicArn,
                     Message = JsonSerializer.Serialize(eventBody),
-                    MessageAttributes = new Dictionary<string, MessageAttributeValue>
-                    {
-                        {"schema", new MessageAttributeValue
-                        {
-                            DataType = "String",
-                            StringValue = eventBody?["$schema"]?.ToString()
-                        }},
-                        {"user", new MessageAttributeValue
-                        {
-                            DataType = "String",
-                            StringValue = eventBody?["performer"]?["user_text"]?.ToString()
-                        }},
-                        {"namespace", new MessageAttributeValue
-                        {
-                            DataType = "String",
-                            StringValue = eventBody?["page_namespace"]?.ToString()
-                        }}
-                    }
+                    MessageAttributes = attributes
                 });
                 
                 _logger.LogInformation("Published message topic {TopicArn}, {MessageId}", _snsSettings.Value.TopicArn,
